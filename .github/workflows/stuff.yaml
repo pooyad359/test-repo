@@ -1,0 +1,21 @@
+name: Check Diff
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  check-diff:
+    name: Check Difference
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Show Branch
+        run: |
+          git branch
+          echo "Diffs:"
+          git diff
+          if [ $(git branch| wc -l) -ne "0" ]; then
+            echo "No change was detected"
+            exit 1
+          fi
+
