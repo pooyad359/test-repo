@@ -6,14 +6,13 @@ on:
 
 jobs:
   check-diff:
-    
     name: Check Difference
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Show Branch
       - run: |
-        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
       - run: |
           git branch
           echo "Diffs:"
@@ -22,4 +21,3 @@ jobs:
             echo "No change was detected"
             exit 1
           fi
-
