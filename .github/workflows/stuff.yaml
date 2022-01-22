@@ -6,7 +6,6 @@ on:
 
 jobs:
   check-diff:
-    name: Check Version Difference
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -15,10 +14,12 @@ jobs:
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
       - name: Check Diffs
         run: |
-          git branch
-          echo "Diffs:"
-          git diff origin/master HEAD
-          if [ $(git diff origin/master HEAD .version| wc -l) -eq "0" ]; then
-            echo "No change was detected"
+          VERSION_MASTER=$(git show origin/master:.version)
+          VERSION_HEAD=$(git show HEAD:.version)
+          VERSION_LATEST=$(echo -e "$VERSION_MASTER\n$VERSION_HEAD" | sort -rV | head -n 1)
+          if [ "$VERSION_HEAD" = "$VERSION_LATEST" ]; then
+            echo "Version number was updated from $VERSION_MASTER to $VERSION_HEAD"
+          else
+            echo "The new version ($VERSION_HEAD) must be higher than the old one ($VERSION_MASTER)"
             exit 1
           fi
