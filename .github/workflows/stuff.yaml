@@ -9,17 +9,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Fetch Branch
-        run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
-      - name: Check Diffs
-        run: |
-          VERSION_MASTER=$(git show origin/master:.version)
-          VERSION_HEAD=$(git show HEAD:.version)
-          VERSION_OLD=$(echo -e "$VERSION_MASTER\n$VERSION_HEAD" | sort -V | head -n 1)
-          if [ "$VERSION_HEAD" = "$VERSION_OLD" ]; then
-            echo "The new version ($VERSION_HEAD) must be higher than the old one ($VERSION_MASTER)"
-            exit 1
-          else
-            echo "Version number was updated from $VERSION_MASTER to $VERSION_HEAD"
-          fi
+      - uses: pooyad359/version-check-action@v0.0.2
