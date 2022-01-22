@@ -11,10 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Fetch Branch
-      - run: |
+        run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
       - name: Check Diffs
-      - run: |
+        run: |
           git branch
           echo "Diffs:"
           git diff origin/master HEAD
