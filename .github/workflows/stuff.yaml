@@ -6,15 +6,19 @@ on:
 
 jobs:
   check-diff:
+    
     name: Check Difference
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2
       - name: Show Branch
-        run: |
+      - run: |
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+      - run: |
           git branch
           echo "Diffs:"
-          git diff
-          if [ $(git branch| wc -l) -ne "0" ]; then
+          git diff origin/master HEAD
+          if [ $(git diff origin/master HEAD .version| wc -l) -ne "0" ]; then
             echo "No change was detected"
             exit 1
           fi
