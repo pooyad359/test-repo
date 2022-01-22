@@ -18,7 +18,7 @@ jobs:
           git branch
           echo "Diffs:"
           git diff origin/master HEAD
-          if [ $(git diff origin/master HEAD .version| wc -l) -ne "0" ]; then
+          if [ $(git diff origin/master HEAD .version| wc -l) -eq "0" ]; then
             echo "No change was detected"
             exit 1
           fi
