@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Show Branch
+      - name: Fetch Branch
       - run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+      - name: Check Diffs
       - run: |
           git branch
           echo "Diffs:"
