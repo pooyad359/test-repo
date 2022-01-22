@@ -1,0 +1,24 @@
+name: Check Diff
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  check-diff:
+    name: Check Difference
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Fetch Branch
+        run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+      - name: Check Diffs
+        run: |
+          git branch
+          echo "Diffs:"
+          git diff origin/master HEAD
+          if [ $(git diff origin/master HEAD .version| wc -l) -eq "0" ]; then
+            echo "No change was detected"
+            exit 1
+          fi
