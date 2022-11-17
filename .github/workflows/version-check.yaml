@@ -15,9 +15,11 @@ jobs:
       - name: terminal
         run: |
           CURRENT_VERSION=`cat pyproject.toml | sed -rn 's/version = "(.*)"/\1/p'`
-          PREV_VERSION=`git show origin/develop:README.md | sed -rn 's/version = "(.*)"/\1/p'`
+          PREV_VERSION=`git show $GITHUB_BASE_REF:pyproject.toml | sed -rn 's/version = "(.*)"/\1/p'`
           echo "version = ${CURRENT_VERSION}"
-          echo ${{github.ref_name}}
-          echo $INPUT_DEFAULT_BRANCH 
-          echo $GITHUB_BASE_REF
+          echo "1: ${{github.ref_name}}"
+          echo "2: $INPUT_DEFAULT_BRANCH "
+          echo "3: $GITHUB_BASE_REF"
+          echo "4: $GITHUB_REF"
+          echo "5: $GITHUB_REF_NAME"
 
