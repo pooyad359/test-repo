@@ -10,4 +10,3 @@ if __name__ == "__main__":
     current_tuple = tuple(int(i) for i in current_version.split("."))
     if not current_tuple > previous_tuple:
         raise VersionError(f"Current version (`{current_version}`) must be greater than old version (`{previous_version}`)")
-    
