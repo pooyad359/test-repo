@@ -1,0 +1,23 @@
+name: Check Version Number
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  check-diff:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+      - name: terminal
+        run: |
+          CURRENT_VERSION=`cat pyproject.toml | sed -rn 's/version = "(.*)"/\1/p'`
+          PREV_VERSION=`git show origin/develop:README.md | sed -rn 's/version = "(.*)"/\1/p'`
+          echo "version = ${CURRENT_VERSION}"
+          echo ${{github.ref_name}}
+          echo $INPUT_DEFAULT_BRANCH 
+          echo $GITHUB_BASE_REF
+
