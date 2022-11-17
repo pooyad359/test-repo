@@ -1,7 +1,6 @@
 name: Check Version Number v2
 on:
   pull_request:
-    types: [ready_for_review]
     branches:
       - master
 
