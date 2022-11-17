@@ -24,4 +24,5 @@ jobs:
           echo "3: $GITHUB_BASE_REF"
           echo "4: $GITHUB_REF"
           echo "5: $GITHUB_REF_NAME"
+          python version_check.py $PREV_VERSION $CURRENT_VERSION
 
