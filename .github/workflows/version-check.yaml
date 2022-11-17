@@ -16,8 +16,9 @@ jobs:
         run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
           CURRENT_VERSION=`cat pyproject.toml | sed -rn 's/version = "(.*)"/\1/p'`
-          PREV_VERSION=`git show $GITHUB_BASE_REF:pyproject.toml | sed -rn 's/version = "(.*)"/\1/p'`
+          PREV_VERSION=`git show origin/$GITHUB_BASE_REF:pyproject.toml | sed -rn 's/version = "(.*)"/\1/p'`
           echo "version = ${CURRENT_VERSION}"
+          echo "prev_version = ${PREV_VERSION}"
           echo "1: ${{github.ref_name}}"
           echo "2: $INPUT_DEFAULT_BRANCH "
           echo "3: $GITHUB_BASE_REF"
