@@ -1,4 +1,4 @@
-name: Check Version Number
+name: Check Version Number v2
 on:
   pull_request:
     branches:
