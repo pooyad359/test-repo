@@ -25,4 +25,8 @@ jobs:
           echo "4: $GITHUB_REF"
           echo "5: $GITHUB_REF_NAME"
           python version_check.py $PREV_VERSION $CURRENT_VERSION
+      - name: grep_sed
+        run: |
+          cat pyproject.toml | grep version
+          cat pyproject.toml | sed -rn 's/version = (.*)/\1/p' 
 
