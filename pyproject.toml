@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "test-repo"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Pooya Darvehei <pdarvehei@fmgl.com.au>"]
 
